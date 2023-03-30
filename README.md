@@ -1,8 +1,8 @@
 # Rate Limiting with the Fastly Edge
-Enjoy the examples. Feedback is welcome.
+This repository contains functional examples to use Fastly Edge Rate Limiting product. For more information, see the Fastly documentation [About Edge Rate Limiting](https://docs.fastly.com/en/guides/about-edge-rate-limiting).
 
 # Pre-reqs
-* Make sure Edge Rate Limiting is enabled for your Fastly Account. [About Edge Rate Limiting](https://docs.fastly.com/en/guides/about-edge-rate-limiting)
+* Make sure Edge Rate Limiting is enabled for your Fastly Account. 
 
 # How to deploy
 * Customize the USER_DOMAIN_NAME variable in variables.tf
