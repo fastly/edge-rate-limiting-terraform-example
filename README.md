@@ -2,7 +2,7 @@
 Enjoy the examples. Feedback is welcome.
 
 # Pre-reqs
-* Make sure Edge Rate Limiting is enabled for your Fastly Account. [https://docs.fastly.com/en/guides/about-edge-rate-limiting]
+* Make sure Edge Rate Limiting is enabled for your Fastly Account. [About Edge Rate Limiting](https://docs.fastly.com/en/guides/about-edge-rate-limiting)
 
 # How to deploy
 * Customize the USER_DOMAIN_NAME variable in variables.tf
