@@ -13,5 +13,5 @@ variable "USER_DOMAIN_NAME" {
 variable "USER_DEFAULT_BACKEND_HOSTNAME" {
   type = string
   description = "Backend for your service."
-  default = "return-status.demotool.site"
+  default = "status.demotool.site"
 }
