@@ -13,10 +13,16 @@ This repository contains functional examples to use Fastly Edge Rate Limiting pr
 # What Edge Rate Limiting examples are in here?
 ## Default ERL configuration
 This is the out of the box configuration for ERL all within a single init VCL snippet
+
 ## Rate Limit by ASN when the request is coming from a hosting provider
 Hosting providers can often be the source for abusive traffic since it is economically more attractive for attackers to use hosting provider proxies for sourcing attacks. This snippet will only check the rate for requests that are sourced from hosting providers. If the rate is exceeded, then the ASN name will be the key for rate limiting.
+
+## Rate limit by user id in a request header
+Many applications, especially APIs, will utilize a specific header for distinguishing between users. This example uses the request header "user-id" as the rate limiting identifier.
+
 ## Rate Limit by all distinct URL
 If there is a hard limit on the amount of traffic your backend should receive, then you may enforce a rate counter for distinct URLs. This includes query params as well.
+
 ## Rate Limit by groupings of URLs
 If there is a hard limit on the amount of traffic your backend should receive for groupings of endpoints, then you may enforce a rate counter for those groupings as well. Grouping URLs can be helpful when the same backends are used for many different web or API endpoints.
 
