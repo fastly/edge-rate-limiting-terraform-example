@@ -47,14 +47,6 @@ resource "fastly_service_vcl" "edge-rate-limiting-terraform-service" {
     priority = 90
   }
 
-    #### Debug Rate limit with lower volume traffic - ONLY USE FOR DEBUGGING SINCE THIS SENDS RATE COUNT INFORMATION BACK TO THE CLIENT
-  snippet {
-    name = "Debug Low Volume Login Edge Rate Limit"
-    content = file("${path.module}/snippets/debug_low_volume_edge_rate_limit.vcl")
-    type = "deliver"
-    priority = 100
-  }
-
     # snippet {
     #   name = "Edge Rate Limiting with URL as key"
     #   content = file("${path.module}/snippets/edge_rate_limiting_url_key.vcl")
@@ -126,6 +118,7 @@ resource "fastly_service_dictionary_items" "login_paths_dictionary_items" {
     "/auth": 2,
     "/gateway": 3,
     "/identity": 4,
+    "/anything/login": 5,
   }
 
   manage_items = false
@@ -140,9 +133,8 @@ resource "fastly_service_dictionary_items" "login_edge_rate_limit_config_diction
 
   # rate_limit_rpm_value may not be less than 10
   items = {
-    "rate_limit_rpm_value": "5",
+    "rl_low_volume_60_sec_bucket_limit": "5",
     "blocking": "true",
-    "rate_limit_delta_value": "1",
   }
   manage_items = true
 }

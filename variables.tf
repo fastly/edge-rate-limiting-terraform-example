@@ -7,7 +7,7 @@ variable "FASTLY_API_KEY" {
 variable "USER_DOMAIN_NAME" {
   type = string
   description = "Frontend domain for your service."
-  default = "YOUR_DOMAIN_HERE"
+  # default = "YOUR_DOMAIN_HERE.global.ssl.fastly.net"
 }
 
 variable "USER_DEFAULT_BACKEND_HOSTNAME" {
