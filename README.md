@@ -14,6 +14,13 @@ This repository contains functional examples to use Fastly Edge Rate Limiting pr
 ## Default ERL configuration
 This is the out of the box configuration for ERL all within a single init VCL snippet
 
+## Rate Limit with a tarpit mitigation
+Many organizations would like to disincentivize certain behaviors such as aggressive web scraping not by blocking, but by slowing down the web scrapers. Tarpitting may be an effective strategy for slowing down scrapers without blocking the scrapers.
+
+The following request will bypass the rate limit check so that you may see what the tarpit mitigation looks like.
+
+curl https://YOUR_DOMAIN_HERE/ -H "slowdown: true" -H "tarpit: abc"
+
 ## Rate Limit by ASN when the request is coming from a hosting provider
 Hosting providers can often be the source for abusive traffic since it is economically more attractive for attackers to use hosting provider proxies for sourcing attacks. This snippet will only check the rate for requests that are sourced from hosting providers. If the rate is exceeded, then the ASN name will be the key for rate limiting.
 

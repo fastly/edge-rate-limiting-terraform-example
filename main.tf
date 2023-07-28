@@ -38,20 +38,36 @@ resource "fastly_service_vcl" "edge-rate-limiting-terraform-service" {
     #   priority = 100
     # }
 
-    # snippet {
-    #   name = "Edge Rate Limiting with URL as key"
-    #   content = file("${path.module}/snippets/edge_rate_limiting_url_key.vcl")
-    #   type = "init"
-    #   priority = 105
-    # }
+  #### Rate limit with lower volume traffic
+  # snippet {
+  #   name = "Low Volume Login Edge Rate Limiting"
+  #   content = file("${path.module}/snippets/edge_rate_limiting_low_volume.vcl")
+  #   type = "init"
+  #   priority = 90
+  # }
 
-    ##### Rate limit by org name when it is a hosting provider - Red Sauron
-    # snippet {
-    #   name = "Rate Limit by ASN Name"
-    #   content = file("${path.module}/snippets/edge_rate_limiting_asname_key.vcl")
-    #   type = "init"
-    #   priority = 106
-    # }
+  #### Rate limit with Tarpit mitigation
+  snippet {
+    name = "Edge Rate Limiting with Tarpitting mitigation"
+    content = file("${path.module}/snippets/edge_rate_limiting_tarpit.vcl")
+    type = "init"
+    priority = 104
+  }
+
+  # snippet {
+  #   name = "Edge Rate Limiting with URL as key"
+  #   content = file("${path.module}/snippets/edge_rate_limiting_url_key.vcl")
+  #   type = "init"
+  #   priority = 105
+  # }
+
+  ##### Rate limit by org name when it is a hosting provider - Red Sauron
+  # snippet {
+  #   name = "Rate Limit by ASN Name"
+  #   content = file("${path.module}/snippets/edge_rate_limiting_asname_key.vcl")
+  #   type = "init"
+  #   priority = 106
+  # }
 
     ##### Rate limit by request header "user-id" - Orange frodo
     snippet {
@@ -78,12 +94,20 @@ resource "fastly_service_vcl" "edge-rate-limiting-terraform-service" {
     # }
 
     ##### It is necessecary to disable caching for ERL to increment the counter for origin/backend requests
-    snippet {
-      name = "Disable caching"
-      content = file("${path.module}/snippets/disable_caching.vcl")
-      type = "recv"
-      priority = 100
-    }
+  snippet {
+    name = "Disable caching"
+    content = file("${path.module}/snippets/disable_caching.vcl")
+    type = "recv"
+    priority = 100
+  }
+
+  dictionary {
+    name       = "login_paths"
+  }
+
+  dictionary {
+    name       = "login_edge_rate_limit_config"
+  }
 
     force_destroy = true
 }
