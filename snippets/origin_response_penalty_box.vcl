@@ -37,13 +37,13 @@ sub vcl_fetch {
 }
 ##### End check backend response status code
 
-# Start useful troubleshooting based on the response
-sub vcl_deliver {
+# Useful troubleshooting based on the response - Start
+/* sub vcl_deliver {
   if (req.http.fastly-debug == "1"){
     set resp.http.X-ERL-PenaltyBox-has = ratelimit.penaltybox_has(rl_origin_waf_response_pb, client.ip);
   }
-}
-# End useful troubleshooting based on the response
+} */
+# Useful troubleshooting based on the response - End
 
 sub vcl_error {
     # Snippet rate-limiter-v1-origin_waf_response-error-error : 100

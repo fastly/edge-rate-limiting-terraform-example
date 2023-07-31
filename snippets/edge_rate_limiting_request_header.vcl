@@ -19,7 +19,7 @@ sub rl_orange_frodo_process {
   declare local var.rl_orange_frodo_ttl TIME;
   declare local var.rl_orange_frodo_entry STRING;
   set var.rl_orange_frodo_limit = 10;
-  set var.rl_orange_frodo_window = 60;
+  set var.rl_orange_frodo_window = 10;
   set var.rl_orange_frodo_ttl = 4m;
   
   # Use the request header user-id for the rate limit key
